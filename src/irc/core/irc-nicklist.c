@@ -245,7 +245,8 @@ static void fill_who(SERVER_REC *server, const char *channel, const char *user, 
 			nicklist_set_account(chanrec, nickrec,
 			                     strcmp(account, "0") == 0 ? "*" : account);
 		}
-		sscanf(hops, "%d", &nickrec->hops);
+		if (sscanf(hops, "%d", &nickrec->hops) != 1)
+			nickrec->hops = 0;
 	}
 
 	nicklist_update_flags(server, nick,
